@@ -1,0 +1,229 @@
+const previewEl = document.getElementById("preview");
+const contentEl = document.getElementById("content");
+const shareBtn = document.getElementById("shareBtn");
+const shareResult = document.getElementById("shareResult");
+const shareLink = document.getElementById("shareLink");
+const copyBtn = document.getElementById("copyBtn");
+const themeToggle = document.getElementById("themeToggle");
+const socialShareBtn = document.getElementById("socialShareBtn");
+const socialShareModal = document.getElementById("socialShareModal");
+const closeModal = document.getElementById("closeModal");
+
+// 主题切换
+function initTheme() {
+  const savedTheme = localStorage.getItem("theme") || "light";
+  document.body.className = savedTheme + "-theme";
+}
+
+function toggleTheme() {
+  const currentTheme = document.body.classList.contains("dark-theme") ? "dark" : "light";
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+  document.body.className = newTheme + "-theme";
+  localStorage.setItem("theme", newTheme);
+}
+
+initTheme();
+themeToggle.addEventListener("click", toggleTheme);
+
+// 触摸手势支持
+let lastTouchEnd = 0;
+document.addEventListener("touchend", (e) => {
+  const now = Date.now();
+  if (now - lastTouchEnd < 300) {
+    // 双击放大
+    if (e.target.closest(".preview-body")) {
+      togglePreviewZoom(e.target.closest(".preview-body"));
+    }
+  }
+  lastTouchEnd = now;
+}, false);
+
+function togglePreviewZoom(element) {
+  if (element.style.fontSize === "18px") {
+    element.style.fontSize = "14px";
+  } else {
+    element.style.fontSize = "18px";
+  }
+}
+
+// 社交媒体分享
+function openSocialShare() {
+  socialShareModal.classList.remove("hidden");
+}
+
+function closeSocialShare() {
+  socialShareModal.classList.add("hidden");
+}
+
+socialShareBtn.addEventListener("click", openSocialShare);
+closeModal.addEventListener("click", closeSocialShare);
+socialShareModal.addEventListener("click", (e) => {
+  if (e.target === socialShareModal) {
+    closeSocialShare();
+  }
+});
+
+document.querySelectorAll(".social-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const platform = btn.dataset.platform;
+    const url = shareLink.href || location.href;
+    const title = "查看我的 Markdown 分享";
+    shareToSocial(platform, url, title);
+  });
+});
+
+function shareToSocial(platform, url, title) {
+  const shareUrls = {
+    wechat: () => {
+      // 微信需要复制链接
+      copyToClipboard(url);
+      alert("链接已复制，请在微信中粘贴分享");
+    },
+    qq: () => {
+      window.open(`https://connect.qq.com/widget/shareqq/index.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`, "_blank");
+    },
+    weibo: () => {
+      window.open(`https://service.weibo.com/share/share.php?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`, "_blank");
+    },
+    twitter: () => {
+      window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, "_blank");
+    }
+  };
+
+  if (shareUrls[platform]) {
+    shareUrls[platform]();
+    closeSocialShare();
+  }
+}
+
+const defaultContent = `# 欢迎使用 Markdown Share
+
+在左侧输入 Markdown，右侧自动预览。
+
+## 功能
+- 实时预览
+- 生成短链接
+- 分享后可打开预览
+
+
+
+`;
+
+contentEl.value = defaultContent;
+renderPreview();
+
+contentEl.addEventListener("input", renderPreview);
+
+shareBtn.addEventListener("click", async () => {
+  shareBtn.disabled = true;
+  shareBtn.textContent = "生成中...";
+  shareResult.hidden = true;
+
+  try {
+    const res = await fetch("/api/share", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: contentEl.value })
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || "分享失败");
+    }
+
+    const data = await res.json();
+    const fullUrl = `${location.origin}${data.url}`;
+    shareLink.textContent = fullUrl;
+    shareLink.href = fullUrl;
+    shareResult.hidden = false;
+  } catch (err) {
+    alert(err.message || "分享失败");
+  } finally {
+    shareBtn.disabled = false;
+    shareBtn.textContent = "分享";
+  }
+});
+
+copyBtn.addEventListener("click", async () => {
+  const text = shareLink.textContent;
+  if (!text) return;
+
+  // 优先使用现代 API，失败时降级到传统方法
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+      showCopySuccess();
+    } else {
+      fallbackCopy(text);
+    }
+  } catch (err) {
+    // HTTPS 环境可能也不允许，使用降级方案
+    fallbackCopy(text);
+  }
+});
+
+function showCopySuccess() {
+  copyBtn.textContent = "已复制";
+  setTimeout(() => {
+    copyBtn.textContent = "复制";
+  }, 1200);
+}
+
+function fallbackCopy(text) {
+  // 创建临时 textarea
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  textarea.style.left = "-9999px";
+  document.body.appendChild(textarea);
+
+  try {
+    textarea.select();
+    const success = document.execCommand("copy");
+    if (success) {
+      showCopySuccess();
+    } else {
+      alert("复制失败，请手动复制链接");
+    }
+  } catch (err) {
+    console.error("复制失败:", err);
+    alert("复制失败，请手动复制链接");
+  } finally {
+    document.body.removeChild(textarea);
+  }
+}
+
+// 供社交媒体分享使用
+function copyToClipboard(text) {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text);
+    } else {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+    }
+  } catch (err) {
+    console.error("复制失败:", err);
+    alert("复制失败，请手动复制");
+  }
+}
+
+async function renderPreview() {
+  const res = await fetch("/api/preview", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content: contentEl.value })
+  });
+  if (res.ok) {
+    const data = await res.json();
+    previewEl.innerHTML = data.html;
+  }
+}
