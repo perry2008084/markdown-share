@@ -5,10 +5,12 @@ const socialShareBtn = document.getElementById("socialShareBtn");
 const socialShareModal = document.getElementById("socialShareModal");
 const closeModal = document.getElementById("closeModal");
 
-// 初始化多语言支持
-if (window.I18n) {
-  window.I18n.initI18n();
-}
+// 初始化多语言支持 - 等待 DOM 和所有脚本加载完成
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.I18n) {
+    window.I18n.initI18n();
+  }
+});
 
 // 主题切换
 function initTheme() {
