@@ -9,6 +9,11 @@ const socialShareBtn = document.getElementById("socialShareBtn");
 const socialShareModal = document.getElementById("socialShareModal");
 const closeModal = document.getElementById("closeModal");
 
+// 初始化多语言支持
+if (window.I18n) {
+  window.I18n.initI18n();
+}
+
 // 主题切换
 function initTheme() {
   const savedTheme = localStorage.getItem("theme") || "light";
@@ -67,7 +72,7 @@ document.querySelectorAll(".social-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const platform = btn.dataset.platform;
     const url = shareLink.href || location.href;
-    const title = "查看我的 Markdown 分享";
+    const title = window.I18n?.t("查看我的 Markdown 分享") || "查看我的 Markdown 分享";
     shareToSocial(platform, url, title);
   });
 });
@@ -77,7 +82,7 @@ function shareToSocial(platform, url, title) {
     wechat: () => {
       // 微信需要复制链接
       copyToClipboard(url);
-      alert("链接已复制，请在微信中粘贴分享");
+      alert(window.I18n?.t("链接已复制，请在微信中粘贴分享") || "链接已复制，请在微信中粘贴分享");
     },
     qq: () => {
       window.open(`https://connect.qq.com/widget/shareqq/index.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`, "_blank");
@@ -116,7 +121,7 @@ contentEl.addEventListener("input", renderPreview);
 
 shareBtn.addEventListener("click", async () => {
   shareBtn.disabled = true;
-  shareBtn.textContent = "生成中...";
+  shareBtn.textContent = window.I18n?.t("生成中...") || "生成中...";
   shareResult.hidden = true;
 
   try {
@@ -128,7 +133,7 @@ shareBtn.addEventListener("click", async () => {
 
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
-      throw new Error(err.error || "分享失败");
+      throw new Error(err.error || (window.I18n?.t("分享失败") || "分享失败"));
     }
 
     const data = await res.json();
@@ -137,10 +142,10 @@ shareBtn.addEventListener("click", async () => {
     shareLink.href = fullUrl;
     shareResult.hidden = false;
   } catch (err) {
-    alert(err.message || "分享失败");
+    alert(err.message || (window.I18n?.t("分享失败") || "分享失败"));
   } finally {
     shareBtn.disabled = false;
-    shareBtn.textContent = "分享";
+    shareBtn.textContent = window.I18n?.t("分享") || "分享";
   }
 });
 
@@ -163,9 +168,9 @@ copyBtn.addEventListener("click", async () => {
 });
 
 function showCopySuccess() {
-  copyBtn.textContent = "已复制";
+  copyBtn.textContent = window.I18n?.t("已复制") || "已复制";
   setTimeout(() => {
-    copyBtn.textContent = "复制";
+    copyBtn.textContent = window.I18n?.t("复制") || "复制";
   }, 1200);
 }
 
@@ -184,11 +189,11 @@ function fallbackCopy(text) {
     if (success) {
       showCopySuccess();
     } else {
-      alert("复制失败，请手动复制链接");
+      alert(window.I18n?.t("复制失败，请手动复制链接") || "复制失败，请手动复制链接");
     }
   } catch (err) {
     console.error("复制失败:", err);
-    alert("复制失败，请手动复制链接");
+    alert(window.I18n?.t("复制失败，请手动复制链接") || "复制失败，请手动复制链接");
   } finally {
     document.body.removeChild(textarea);
   }
@@ -212,7 +217,7 @@ function copyToClipboard(text) {
     }
   } catch (err) {
     console.error("复制失败:", err);
-    alert("复制失败，请手动复制");
+    alert(window.I18n?.t("复制失败，请手动复制链接") || "复制失败，请手动复制链接");
   }
 }
 

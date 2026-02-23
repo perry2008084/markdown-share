@@ -5,6 +5,11 @@ const socialShareBtn = document.getElementById("socialShareBtn");
 const socialShareModal = document.getElementById("socialShareModal");
 const closeModal = document.getElementById("closeModal");
 
+// 初始化多语言支持
+if (window.I18n) {
+  window.I18n.initI18n();
+}
+
 // 主题切换
 function initTheme() {
   const savedTheme = localStorage.getItem("theme") || "light";
@@ -63,7 +68,7 @@ document.querySelectorAll(".social-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const platform = btn.dataset.platform;
     const url = location.href;
-    const title = "查看我的 Markdown 分享";
+    const title = window.I18n?.t("查看我的 Markdown 分享") || "查看我的 Markdown 分享";
     shareToSocial(platform, url, title);
   });
 });
@@ -73,7 +78,7 @@ function shareToSocial(platform, url, title) {
     wechat: () => {
       // 微信需要复制链接
       copyToClipboard(url);
-      alert("链接已复制，请在微信中粘贴分享");
+      alert(window.I18n?.t("链接已复制，请在微信中粘贴分享") || "链接已复制，请在微信中粘贴分享");
     },
     qq: () => {
       window.open(`https://connect.qq.com/widget/shareqq/index.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`, "_blank");
@@ -101,7 +106,7 @@ async function loadShare() {
   try {
     const res = await fetch(`/api/share/${id}`);
     if (!res.ok) {
-      throw new Error("未找到分享内容");
+      throw new Error(window.I18n?.t("加载中...") || "加载中...");
     }
     const data = await res.json();
     const previewRes = await fetch("/api/preview", {
@@ -112,9 +117,9 @@ async function loadShare() {
     const previewData = await previewRes.json();
     previewEl.innerHTML = previewData.html;
     const time = new Date(data.createdAt).toLocaleString();
-    metaEl.textContent = `分享于 ${time}`;
+    metaEl.textContent = `${window.I18n?.t("加载中...") || "加载中..."} ${time}`;
   } catch (err) {
-    metaEl.textContent = err.message || "加载失败";
+    metaEl.textContent = err.message || (window.I18n?.t("加载中...") || "加载中...");
   }
 }
 
@@ -136,6 +141,6 @@ function copyToClipboard(text) {
     }
   } catch (err) {
     console.error("复制失败:", err);
-    alert("复制失败，请手动复制");
+    alert(window.I18n?.t("复制失败，请手动复制链接") || "复制失败，请手动复制链接");
   }
 }

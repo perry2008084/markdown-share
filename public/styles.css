@@ -388,6 +388,52 @@ textarea {
   position: absolute;
 }
 
+/* 语言选择器 */
+.language-selector {
+  position: fixed;
+  top: 20px;
+  right: 80px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--sans);
+  z-index: 999;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.language-selector:hover {
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.language-selector:focus {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.dark-theme .language-selector {
+  background: var(--panel);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.dark-theme .language-selector option {
+  background: var(--panel);
+  color: var(--ink);
+}
+
+@media (max-width: 768px) {
+  .language-selector {
+    top: 80px;
+    right: 20px;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
 /* 模态框 */
 .modal {
   position: fixed;
