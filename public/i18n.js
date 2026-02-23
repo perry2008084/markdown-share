@@ -290,28 +290,43 @@ function updatePageLanguage() {
 
   elementsToUpdate.forEach(selector => {
     document.querySelectorAll(selector).forEach(el => {
-      const text = el.textContent.trim();
-      // 确保文本不为空且是纯文本（不包含子元素）
-      if (text && !el.querySelector('*') && translations[currentLang]?.[text]) {
-        console.log('Translating:', text, '->', translations[currentLang][text]);
-        el.textContent = translations[currentLang][text];
+      // 保存原始文本（如果是第一次）
+      if (!el.dataset.originalText && !el.querySelector('*')) {
+        el.dataset.originalText = el.textContent.trim();
+      }
+
+      // 从原始文本翻译
+      const originalText = el.dataset.originalText;
+      if (originalText && translations[currentLang]?.[originalText]) {
+        console.log('Translating:', originalText, '->', translations[currentLang][originalText]);
+        el.textContent = translations[currentLang][originalText];
       }
     });
   });
 
   // 更新占位符
   document.querySelectorAll('[placeholder]').forEach(el => {
-    const placeholder = el.getAttribute('placeholder');
-    if (placeholder && translations[currentLang]?.[placeholder]) {
-      el.setAttribute('placeholder', translations[currentLang][placeholder]);
+    // 保存原始占位符（如果是第一次）
+    if (!el.dataset.originalPlaceholder) {
+      el.dataset.originalPlaceholder = el.getAttribute('placeholder');
+    }
+
+    const originalPlaceholder = el.dataset.originalPlaceholder;
+    if (originalPlaceholder && translations[currentLang]?.[originalPlaceholder]) {
+      el.setAttribute('placeholder', translations[currentLang][originalPlaceholder]);
     }
   });
 
   // 更新aria-label
   document.querySelectorAll('[aria-label]').forEach(el => {
-    const ariaLabel = el.getAttribute('aria-label');
-    if (ariaLabel && translations[currentLang]?.[ariaLabel]) {
-      el.setAttribute('aria-label', translations[currentLang][ariaLabel]);
+    // 保存原始 aria-label（如果是第一次）
+    if (!el.dataset.originalAriaLabel) {
+      el.dataset.originalAriaLabel = el.getAttribute('aria-label');
+    }
+
+    const originalAriaLabel = el.dataset.originalAriaLabel;
+    if (originalAriaLabel && translations[currentLang]?.[originalAriaLabel]) {
+      el.setAttribute('aria-label', translations[currentLang][originalAriaLabel]);
     }
   });
 
