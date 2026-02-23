@@ -273,26 +273,36 @@ function t(key) {
 
 // 更新页面所有需要翻译的文本
 function updatePageLanguage() {
-  // 更新所有文本节点
-  const walker = document.createTreeWalker(
-    document.body,
-    NodeFilter.SHOW_TEXT,
-    null,
-    false
-  );
+  console.log('Updating page language to:', currentLang);
 
-  let node;
-  while (node = walker.nextNode()) {
-    const text = node.textContent.trim();
-    if (text && translations[currentLang]?.[text]) {
-      node.textContent = translations[currentLang][text];
-    }
-  }
+  // 更新所有文本节点 - 只更新直接的文本节点，避免修改子元素的文本
+  const elementsToUpdate = [
+    '.hero h1',
+    '.hero .sub',
+    '.label',
+    'button:not(.language-selector):not(.social-btn):not(.close-btn):not([aria-label])',
+    '.header-actions a',
+    '#meta',
+    '#shareLink',
+    '.modal-header h3',
+    '.social-btn span'
+  ];
+
+  elementsToUpdate.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => {
+      const text = el.textContent.trim();
+      // 确保文本不为空且是纯文本（不包含子元素）
+      if (text && !el.querySelector('*') && translations[currentLang]?.[text]) {
+        console.log('Translating:', text, '->', translations[currentLang][text]);
+        el.textContent = translations[currentLang][text];
+      }
+    });
+  });
 
   // 更新占位符
   document.querySelectorAll('[placeholder]').forEach(el => {
     const placeholder = el.getAttribute('placeholder');
-    if (translations[currentLang]?.[placeholder]) {
+    if (placeholder && translations[currentLang]?.[placeholder]) {
       el.setAttribute('placeholder', translations[currentLang][placeholder]);
     }
   });
@@ -300,13 +310,15 @@ function updatePageLanguage() {
   // 更新aria-label
   document.querySelectorAll('[aria-label]').forEach(el => {
     const ariaLabel = el.getAttribute('aria-label');
-    if (translations[currentLang]?.[ariaLabel]) {
+    if (ariaLabel && translations[currentLang]?.[ariaLabel]) {
       el.setAttribute('aria-label', translations[currentLang][ariaLabel]);
     }
   });
 
   // 更新HTML lang属性
   document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : currentLang;
+
+  console.log('Language update completed');
 }
 
 // 创建语言选择器
