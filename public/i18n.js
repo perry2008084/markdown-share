@@ -366,5 +366,7 @@ window.I18n = {
   setLanguage,
   currentLang,
   supportedLangs,
-  initI18n
+  initI18n,
+  detectLanguage,
+  updatePageLanguage
 };

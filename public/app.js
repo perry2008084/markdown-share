@@ -12,7 +12,20 @@ const closeModal = document.getElementById("closeModal");
 // 初始化多语言支持 - 等待 DOM 和所有脚本加载完成
 document.addEventListener('DOMContentLoaded', function() {
   if (window.I18n) {
-    window.I18n.initI18n();
+    // 设置当前语言并更新页面
+    const savedLang = localStorage.getItem('language') || window.I18n.detectLanguage();
+    window.I18n.setLanguage(savedLang);
+    window.I18n.updatePageLanguage();
+
+    // 监听语言选择器变化
+    const selector = document.getElementById('languageSelector');
+    if (selector) {
+      selector.value = window.I18n.currentLang;
+      selector.addEventListener('change', function(e) {
+        window.I18n.setLanguage(e.target.value);
+        window.I18n.updatePageLanguage();
+      });
+    }
   }
 });
 
