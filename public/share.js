@@ -1,8 +1,7 @@
 const previewEl = document.getElementById("preview");
 const metaEl = document.getElementById("meta");
-const themeToggle = document.getElementById("themeToggle");
+const themeSelector = document.getElementById("themeSelector");
 const socialShareBtn = document.getElementById("socialShareBtn");
-const paletteSwatches = document.querySelectorAll(".palette-swatch");
 const socialShareModal = document.getElementById("socialShareModal");
 const closeModal = document.getElementById("closeModal");
 
@@ -27,44 +26,27 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // 主题切换
-function setThemeMode(mode) {
-  const safeMode = mode === "dark" ? "dark" : "light";
-  document.body.classList.remove("light-theme", "dark-theme");
-  document.body.classList.add(safeMode + "-theme");
-  localStorage.setItem("theme", safeMode);
-}
+const themeColors = ["day", "night", "ocean", "ember", "citrus", "forest", "ink", "rose"];
 
 function setThemeColor(color) {
-  const safeColor = color || "ocean";
+  const safeColor = themeColors.includes(color) ? color : "day";
   document.body.dataset.themeColor = safeColor;
   localStorage.setItem("themeColor", safeColor);
-  paletteSwatches.forEach((swatch) => {
-    swatch.classList.toggle("is-active", swatch.dataset.themeColor === safeColor);
-  });
+  if (themeSelector) {
+    themeSelector.value = safeColor;
+  }
 }
 
 function initTheme() {
-  const savedTheme = localStorage.getItem("theme") || "light";
-  const savedColor = localStorage.getItem("themeColor") || "ocean";
-  setThemeMode(savedTheme);
+  const savedColor = localStorage.getItem("themeColor") || "day";
   setThemeColor(savedColor);
 }
 
-function toggleTheme() {
-  const currentTheme = document.body.classList.contains("dark-theme") ? "dark" : "light";
-  const newTheme = currentTheme === "dark" ? "light" : "dark";
-  setThemeMode(newTheme);
-}
-
-paletteSwatches.forEach((swatch) => {
-  swatch.addEventListener("click", () => {
-    setThemeColor(swatch.dataset.themeColor);
-  });
-});
-
 initTheme();
-if (themeToggle) {
-  themeToggle.addEventListener("click", toggleTheme);
+if (themeSelector) {
+  themeSelector.addEventListener("change", (e) => {
+    setThemeColor(e.target.value);
+  });
 }
 
 // 触摸手势支持

@@ -31,6 +31,15 @@ const translations = {
 
     // 主题切换
     "切换主题": "切换主题",
+    "主题色": "主题色",
+    "白天": "白天",
+    "夜晚": "夜晚",
+    "海洋": "海洋",
+    "熔岩": "熔岩",
+    "柑橘": "柑橘",
+    "森林": "森林",
+    "墨蓝": "墨蓝",
+    "玫瑰": "玫瑰",
     "关闭": "关闭"
   },
   en: {
@@ -64,6 +73,15 @@ const translations = {
 
     // 主题切换
     "切换主题": "Toggle Theme",
+    "主题色": "Theme",
+    "白天": "Day",
+    "夜晚": "Night",
+    "海洋": "Ocean",
+    "熔岩": "Ember",
+    "柑橘": "Citrus",
+    "森林": "Forest",
+    "墨蓝": "Ink",
+    "玫瑰": "Rose",
     "关闭": "Close"
   },
   ja: {
@@ -97,6 +115,15 @@ const translations = {
 
     // 主题切换
     "切换主题": "テーマ切り替え",
+    "主题色": "テーマ",
+    "白天": "昼",
+    "夜晚": "夜",
+    "海洋": "オーシャン",
+    "熔岩": "エンバー",
+    "柑橘": "シトラス",
+    "森林": "フォレスト",
+    "墨蓝": "インク",
+    "玫瑰": "ローズ",
     "关闭": "閉じる"
   },
   de: {
@@ -130,6 +157,15 @@ const translations = {
 
     // 主题切换
     "切换主题": "Design umschalten",
+    "主题色": "Thema",
+    "白天": "Tag",
+    "夜晚": "Nacht",
+    "海洋": "Ozean",
+    "熔岩": "Glut",
+    "柑橘": "Zitrus",
+    "森林": "Wald",
+    "墨蓝": "Tinte",
+    "玫瑰": "Rose",
     "关闭": "Schließen"
   },
   es: {
@@ -163,6 +199,15 @@ const translations = {
 
     // 主题切换
     "切换主题": "Cambiar Tema",
+    "主题色": "Tema",
+    "白天": "Día",
+    "夜晚": "Noche",
+    "海洋": "Océano",
+    "熔岩": "Ámbar",
+    "柑橘": "Cítrico",
+    "森林": "Bosque",
+    "墨蓝": "Tinta",
+    "玫瑰": "Rosa",
     "关闭": "Cerrar"
   },
   fr: {
@@ -196,6 +241,15 @@ const translations = {
 
     // 主题切换
     "切换主题": "Changer le Thème",
+    "主题色": "Thème",
+    "白天": "Jour",
+    "夜晚": "Nuit",
+    "海洋": "Océan",
+    "熔岩": "Braise",
+    "柑橘": "Agrume",
+    "森林": "Forêt",
+    "墨蓝": "Encre",
+    "玫瑰": "Rose",
     "关闭": "Fermer"
   },
   pt: {
@@ -229,6 +283,15 @@ const translations = {
 
     // 主题切换
     "切换主题": "Alternar Tema",
+    "主题色": "Tema",
+    "白天": "Dia",
+    "夜晚": "Noite",
+    "海洋": "Oceano",
+    "熔岩": "Brasa",
+    "柑橘": "Citrico",
+    "森林": "Floresta",
+    "墨蓝": "Tinta",
+    "玫瑰": "Rosa",
     "关闭": "Fechar"
   }
 };
@@ -285,7 +348,8 @@ function updatePageLanguage() {
     '#meta',
     '#shareLink',
     '.modal-header h3',
-    '.social-btn span'
+    '.social-btn span',
+    '.theme-selector option'
   ];
 
   elementsToUpdate.forEach(selector => {
