@@ -17,43 +17,50 @@
   --sans: "Work Sans", "Arial", sans-serif;
 }
 
-body[data-theme-color="ocean"] {
+body[data-theme-color="ocean"],
+html[data-theme-color="ocean"] {
   --accent: #0f6b6b;
   --accent-dark: #0a5151;
   --accent-shadow: rgba(15, 107, 107, 0.25);
 }
 
-body[data-theme-color="ember"] {
+body[data-theme-color="ember"],
+html[data-theme-color="ember"] {
   --accent: #c45a2c;
   --accent-dark: #a0441f;
   --accent-shadow: rgba(196, 90, 44, 0.25);
 }
 
-body[data-theme-color="citrus"] {
+body[data-theme-color="citrus"],
+html[data-theme-color="citrus"] {
   --accent: #b8860b;
   --accent-dark: #8b6a08;
   --accent-shadow: rgba(184, 134, 11, 0.25);
 }
 
-body[data-theme-color="forest"] {
+body[data-theme-color="forest"],
+html[data-theme-color="forest"] {
   --accent: #2f6b4f;
   --accent-dark: #24533d;
   --accent-shadow: rgba(47, 107, 79, 0.25);
 }
 
-body[data-theme-color="ink"] {
+body[data-theme-color="ink"],
+html[data-theme-color="ink"] {
   --accent: #2d5b9a;
   --accent-dark: #224373;
   --accent-shadow: rgba(45, 91, 154, 0.25);
 }
 
-body[data-theme-color="rose"] {
+body[data-theme-color="rose"],
+html[data-theme-color="rose"] {
   --accent: #b8455e;
   --accent-dark: #8e3247;
   --accent-shadow: rgba(184, 69, 94, 0.25);
 }
 
-body[data-theme-color="night"] {
+body[data-theme-color="night"],
+html[data-theme-color="night"] {
   --bg: #161616;
   --panel: #262626;
   --ink: #e6e6e6;
@@ -353,13 +360,19 @@ textarea {
 
 /* 主题选择器 */
 .top-controls {
-  position: fixed;
-  top: 20px;
-  right: 20px;
+  position: sticky;
+  top: 16px;
+  margin: 20px 20px 0;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
   z-index: 1000;
+  pointer-events: none;
+}
+
+.top-controls > * {
+  pointer-events: auto;
 }
 
 .theme-settings {
@@ -368,9 +381,10 @@ textarea {
   gap: 10px;
   padding: 8px 12px;
   border-radius: 999px;
-  background: var(--panel);
-  border: 2px solid var(--border);
-  box-shadow: 0 8px 20px var(--shadow);
+  background: color-mix(in srgb, var(--panel) 92%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  box-shadow: 0 10px 24px var(--shadow);
+  backdrop-filter: blur(10px);
 }
 .theme-selector:focus-visible,
 .language-selector:focus-visible {
@@ -381,25 +395,26 @@ textarea {
 /* 语言/主题选择器 */
 .language-selector,
 .theme-selector {
-  padding: 10px 16px;
-  border-radius: 24px;
-  background: var(--panel);
-  border: 2px solid var(--border);
+  padding: 10px 18px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--panel) 94%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
   color: var(--ink);
   cursor: pointer;
   font-size: 14px;
   font-family: var(--sans);
-  font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   outline: none;
-  box-shadow: 0 2px 8px var(--shadow);
+  box-shadow: 0 6px 16px var(--shadow);
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232b221c' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 10px center;
+  background-position: right 12px center;
   background-size: 12px;
-  padding-right: 36px;
-  min-width: 120px;
+  padding-right: 38px;
+  min-width: 132px;
 }
 
 body[data-theme-color="night"] .language-selector,
@@ -407,16 +422,17 @@ body[data-theme-color="night"] .theme-selector {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e0e0e0' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
 }
 
+
 .language-selector:hover,
 .theme-selector:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px var(--shadow);
+  box-shadow: 0 10px 22px var(--shadow);
   border-color: var(--accent);
 }
 
 .language-selector:focus,
 .theme-selector:focus {
-  box-shadow: 0 0 0 3px var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 65%, transparent);
   border-color: var(--accent);
 }
 
@@ -442,10 +458,11 @@ body[data-theme-color="night"] .theme-selector option {
 
 @media (max-width: 768px) {
   .top-controls {
-    top: 16px;
-    right: 16px;
-    flex-direction: column;
-    align-items: flex-end;
+    margin: 14px 16px 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
   }
 
   .language-selector,
@@ -453,11 +470,11 @@ body[data-theme-color="night"] .theme-selector option {
     font-size: 13px;
     padding: 8px 14px;
     padding-right: 34px;
-    min-width: 100px;
+    min-width: 110px;
   }
 
   .theme-settings {
-    padding: 8px 10px;
+    padding: 6px 8px;
     gap: 8px;
   }
 }

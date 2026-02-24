@@ -31,19 +31,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 主题切换
 const themeColors = ["day", "night", "ocean", "ember", "citrus", "forest", "ink", "rose"];
+const themeStorageKey = "themeColor";
 
-function setThemeColor(color) {
+function applyThemeColor(color) {
   const safeColor = themeColors.includes(color) ? color : "day";
   document.body.dataset.themeColor = safeColor;
-  localStorage.setItem("themeColor", safeColor);
-  if (themeSelector) {
+  document.documentElement.dataset.themeColor = safeColor;
+  if (themeSelector && themeSelector.value !== safeColor) {
     themeSelector.value = safeColor;
   }
 }
 
+function setThemeColor(color) {
+  const safeColor = themeColors.includes(color) ? color : "day";
+  applyThemeColor(safeColor);
+  localStorage.setItem(themeStorageKey, safeColor);
+}
+
 function initTheme() {
-  const savedColor = localStorage.getItem("themeColor") || "day";
-  setThemeColor(savedColor);
+  const savedColor = localStorage.getItem(themeStorageKey) || "day";
+  applyThemeColor(savedColor);
 }
 
 initTheme();
@@ -51,7 +58,16 @@ if (themeSelector) {
   themeSelector.addEventListener("change", (e) => {
     setThemeColor(e.target.value);
   });
+  themeSelector.addEventListener("input", (e) => {
+    setThemeColor(e.target.value);
+  });
 }
+
+window.addEventListener("storage", (e) => {
+  if (e.key === themeStorageKey && e.newValue) {
+    applyThemeColor(e.newValue);
+  }
+});
 
 // 触摸手势支持
 let lastTouchEnd = 0;
