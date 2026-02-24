@@ -17,6 +17,23 @@
   --sans: "Work Sans", "Arial", sans-serif;
 }
 
+body.light-theme,
+html.light-theme {
+  --bg: #f6f2ec;
+  --panel: #fffaf3;
+  --ink: #2b221c;
+  --accent: #0f6b6b;
+  --accent-dark: #0a5151;
+  --accent-shadow: rgba(15, 107, 107, 0.25);
+  --muted: #7a6a5f;
+  --border: #e3d8cd;
+  --shadow: rgba(26, 18, 12, 0.08);
+  --input-bg: #ffffff;
+  --code-bg: #f3ebe0;
+  --bg-glow-1: #faf5ed;
+  --bg-glow-2: #f1e5d8;
+}
+
 body[data-theme-color="ocean"],
 html[data-theme-color="ocean"] {
   --accent: #0f6b6b;

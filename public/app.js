@@ -32,11 +32,13 @@ document.addEventListener('DOMContentLoaded', function() {
 // 主题切换
 const themeColors = ["day", "night", "ocean", "ember", "citrus", "forest", "ink", "rose"];
 const themeStorageKey = "themeColor";
+const themeStorageFallbackKey = "theme-color";
 
 function applyThemeColor(color) {
   const safeColor = themeColors.includes(color) ? color : "day";
   document.body.dataset.themeColor = safeColor;
   document.documentElement.dataset.themeColor = safeColor;
+  document.body.classList.remove("light-theme");
   if (themeSelector && themeSelector.value !== safeColor) {
     themeSelector.value = safeColor;
   }
@@ -46,10 +48,14 @@ function setThemeColor(color) {
   const safeColor = themeColors.includes(color) ? color : "day";
   applyThemeColor(safeColor);
   localStorage.setItem(themeStorageKey, safeColor);
+  localStorage.setItem(themeStorageFallbackKey, safeColor);
 }
 
 function initTheme() {
-  const savedColor = localStorage.getItem(themeStorageKey) || "day";
+  const savedColor =
+    localStorage.getItem(themeStorageKey) ||
+    localStorage.getItem(themeStorageFallbackKey) ||
+    "day";
   applyThemeColor(savedColor);
 }
 
@@ -64,10 +70,11 @@ if (themeSelector) {
 }
 
 window.addEventListener("storage", (e) => {
-  if (e.key === themeStorageKey && e.newValue) {
+  if ((e.key === themeStorageKey || e.key === themeStorageFallbackKey) && e.newValue) {
     applyThemeColor(e.newValue);
   }
 });
+
 
 // 触摸手势支持
 let lastTouchEnd = 0;
