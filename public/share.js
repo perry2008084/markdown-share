@@ -2,6 +2,7 @@ const previewEl = document.getElementById("preview");
 const metaEl = document.getElementById("meta");
 const themeToggle = document.getElementById("themeToggle");
 const socialShareBtn = document.getElementById("socialShareBtn");
+const paletteSwatches = document.querySelectorAll(".palette-swatch");
 const socialShareModal = document.getElementById("socialShareModal");
 const closeModal = document.getElementById("closeModal");
 
@@ -28,7 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // 主题切换
 function initTheme() {
   const savedTheme = localStorage.getItem("theme") || "light";
+  const savedColor = localStorage.getItem("themeColor") || "ocean";
   document.body.className = savedTheme + "-theme";
+  applyThemeColor(savedColor);
 }
 
 function toggleTheme() {
@@ -37,6 +40,20 @@ function toggleTheme() {
   document.body.className = newTheme + "-theme";
   localStorage.setItem("theme", newTheme);
 }
+
+function applyThemeColor(color) {
+  document.body.dataset.themeColor = color;
+  localStorage.setItem("themeColor", color);
+  paletteSwatches.forEach((swatch) => {
+    swatch.classList.toggle("is-active", swatch.dataset.themeColor === color);
+  });
+}
+
+paletteSwatches.forEach((swatch) => {
+  swatch.addEventListener("click", () => {
+    applyThemeColor(swatch.dataset.themeColor);
+  });
+});
 
 initTheme();
 themeToggle.addEventListener("click", toggleTheme);
