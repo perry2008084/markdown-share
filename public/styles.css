@@ -36,9 +36,9 @@ html.light-theme {
 
 body[data-theme-color="ocean"],
 html[data-theme-color="ocean"] {
-  --accent: #0f6b6b;
-  --accent-dark: #0a5151;
-  --accent-shadow: rgba(15, 107, 107, 0.25);
+  --accent: #1a6fa0;
+  --accent-dark: #145580;
+  --accent-shadow: rgba(26, 111, 160, 0.25);
 }
 
 body[data-theme-color="ember"],

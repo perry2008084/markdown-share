@@ -72,10 +72,15 @@ const accentThemes = {
     "accent-dark": "#0a5151",
     "accent-shadow": "rgba(15, 107, 107, 0.25)"
   },
+  night: {
+    "accent": "#63c7c0",
+    "accent-dark": "#4aa9a3",
+    "accent-shadow": "rgba(99, 199, 192, 0.28)"
+  },
   ocean: {
-    "accent": "#0f6b6b",
-    "accent-dark": "#0a5151",
-    "accent-shadow": "rgba(15, 107, 107, 0.25)"
+    "accent": "#1a6fa0",
+    "accent-dark": "#145580",
+    "accent-shadow": "rgba(26, 111, 160, 0.25)"
   },
   ember: {
     "accent": "#c45a2c",
