@@ -8,39 +8,43 @@
     <script src="/i18n.js"></script>
   </head>
   <body class="light-theme">
-    <select id="languageSelector" class="language-selector">
-      <option value="zh">中文</option>
-      <option value="en">English</option>
-      <option value="ja">日本語</option>
-      <option value="de">Deutsch</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-      <option value="pt">Português</option>
-    </select>
-    <div class="theme-palette" role="group" aria-label="主题色">
-      <button class="palette-swatch" type="button" data-theme-color="ocean" aria-label="Ocean"></button>
-      <button class="palette-swatch" type="button" data-theme-color="ember" aria-label="Ember"></button>
-      <button class="palette-swatch" type="button" data-theme-color="citrus" aria-label="Citrus"></button>
-      <button class="palette-swatch" type="button" data-theme-color="forest" aria-label="Forest"></button>
-      <button class="palette-swatch" type="button" data-theme-color="ink" aria-label="Ink"></button>
-      <button class="palette-swatch" type="button" data-theme-color="rose" aria-label="Rose"></button>
+    <div class="top-controls">
+      <select id="languageSelector" class="language-selector">
+        <option value="zh">中文</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+        <option value="de">Deutsch</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="pt">Português</option>
+      </select>
+      <div class="theme-settings" role="group" aria-label="主题设置">
+        <div class="theme-palette" role="group" aria-label="主题色">
+          <button class="palette-swatch" type="button" data-theme-color="ocean" aria-label="Ocean"></button>
+          <button class="palette-swatch" type="button" data-theme-color="ember" aria-label="Ember"></button>
+          <button class="palette-swatch" type="button" data-theme-color="citrus" aria-label="Citrus"></button>
+          <button class="palette-swatch" type="button" data-theme-color="forest" aria-label="Forest"></button>
+          <button class="palette-swatch" type="button" data-theme-color="ink" aria-label="Ink"></button>
+          <button class="palette-swatch" type="button" data-theme-color="rose" aria-label="Rose"></button>
+        </div>
+        <button id="themeToggle" class="theme-toggle" aria-label="切换主题">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
     </div>
-    <button id="themeToggle" class="theme-toggle" aria-label="切换主题">
-      <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-      </svg>
-      <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-      </svg>
-    </button>
 
     <main class="app">
       <header class="hero">

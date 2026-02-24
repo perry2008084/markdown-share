@@ -27,36 +27,45 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // 主题切换
+function setThemeMode(mode) {
+  const safeMode = mode === "dark" ? "dark" : "light";
+  document.body.classList.remove("light-theme", "dark-theme");
+  document.body.classList.add(safeMode + "-theme");
+  localStorage.setItem("theme", safeMode);
+}
+
+function setThemeColor(color) {
+  const safeColor = color || "ocean";
+  document.body.dataset.themeColor = safeColor;
+  localStorage.setItem("themeColor", safeColor);
+  paletteSwatches.forEach((swatch) => {
+    swatch.classList.toggle("is-active", swatch.dataset.themeColor === safeColor);
+  });
+}
+
 function initTheme() {
   const savedTheme = localStorage.getItem("theme") || "light";
   const savedColor = localStorage.getItem("themeColor") || "ocean";
-  document.body.className = savedTheme + "-theme";
-  applyThemeColor(savedColor);
+  setThemeMode(savedTheme);
+  setThemeColor(savedColor);
 }
 
 function toggleTheme() {
   const currentTheme = document.body.classList.contains("dark-theme") ? "dark" : "light";
   const newTheme = currentTheme === "dark" ? "light" : "dark";
-  document.body.className = newTheme + "-theme";
-  localStorage.setItem("theme", newTheme);
-}
-
-function applyThemeColor(color) {
-  document.body.dataset.themeColor = color;
-  localStorage.setItem("themeColor", color);
-  paletteSwatches.forEach((swatch) => {
-    swatch.classList.toggle("is-active", swatch.dataset.themeColor === color);
-  });
+  setThemeMode(newTheme);
 }
 
 paletteSwatches.forEach((swatch) => {
   swatch.addEventListener("click", () => {
-    applyThemeColor(swatch.dataset.themeColor);
+    setThemeColor(swatch.dataset.themeColor);
   });
 });
 
 initTheme();
-themeToggle.addEventListener("click", toggleTheme);
+if (themeToggle) {
+  themeToggle.addEventListener("click", toggleTheme);
+}
 
 // 触摸手势支持
 let lastTouchEnd = 0;
