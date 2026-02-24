@@ -30,11 +30,92 @@ const themeColors = ["day", "night", "ocean", "ember", "citrus", "forest", "ink"
 const themeStorageKey = "themeColor";
 const themeStorageFallbackKey = "theme-color";
 
+const baseDayVars = {
+  "bg": "#f6f2ec",
+  "panel": "#fffaf3",
+  "ink": "#2b221c",
+  "accent": "#0f6b6b",
+  "accent-dark": "#0a5151",
+  "accent-shadow": "rgba(15, 107, 107, 0.25)",
+  "muted": "#7a6a5f",
+  "border": "#e3d8cd",
+  "shadow": "rgba(26, 18, 12, 0.08)",
+  "input-bg": "#ffffff",
+  "code-bg": "#f3ebe0",
+  "bg-glow-1": "#faf5ed",
+  "bg-glow-2": "#f1e5d8"
+};
+
+const nightVars = {
+  "bg": "#161616",
+  "panel": "#262626",
+  "ink": "#e6e6e6",
+  "muted": "#a6a6a6",
+  "border": "#3b3b3b",
+  "shadow": "rgba(0, 0, 0, 0.35)",
+  "input-bg": "#262626",
+  "code-bg": "#3a3a3a",
+  "accent": "#63c7c0",
+  "accent-dark": "#4aa9a3",
+  "accent-shadow": "rgba(99, 199, 192, 0.28)",
+  "bg-glow-1": "#1f1f1f",
+  "bg-glow-2": "#232323"
+};
+
+const accentThemes = {
+  day: {
+    "accent": "#0f6b6b",
+    "accent-dark": "#0a5151",
+    "accent-shadow": "rgba(15, 107, 107, 0.25)"
+  },
+  ocean: {
+    "accent": "#0f6b6b",
+    "accent-dark": "#0a5151",
+    "accent-shadow": "rgba(15, 107, 107, 0.25)"
+  },
+  ember: {
+    "accent": "#c45a2c",
+    "accent-dark": "#a0441f",
+    "accent-shadow": "rgba(196, 90, 44, 0.25)"
+  },
+  citrus: {
+    "accent": "#b8860b",
+    "accent-dark": "#8b6a08",
+    "accent-shadow": "rgba(184, 134, 11, 0.25)"
+  },
+  forest: {
+    "accent": "#2f6b4f",
+    "accent-dark": "#24533d",
+    "accent-shadow": "rgba(47, 107, 79, 0.25)"
+  },
+  ink: {
+    "accent": "#2d5b9a",
+    "accent-dark": "#224373",
+    "accent-shadow": "rgba(45, 91, 154, 0.25)"
+  },
+  rose: {
+    "accent": "#b8455e",
+    "accent-dark": "#8e3247",
+    "accent-shadow": "rgba(184, 69, 94, 0.25)"
+  }
+};
+
+function setCssVars(vars) {
+  Object.entries(vars).forEach(([key, value]) => {
+    document.documentElement.style.setProperty(`--${key}`, value);
+  });
+}
+
 function applyThemeColor(color) {
   const safeColor = themeColors.includes(color) ? color : "day";
+  const baseVars = safeColor === "night" ? nightVars : baseDayVars;
+  setCssVars(baseVars);
+  const accentVars = accentThemes[safeColor] || accentThemes.day;
+  if (accentVars) {
+    setCssVars(accentVars);
+  }
   document.body.dataset.themeColor = safeColor;
   document.documentElement.dataset.themeColor = safeColor;
-  document.body.classList.remove("light-theme");
   if (themeSelector && themeSelector.value !== safeColor) {
     themeSelector.value = safeColor;
   }
