@@ -9,6 +9,9 @@ const socialShareBtn = document.getElementById("socialShareBtn");
 const socialShareModal = document.getElementById("socialShareModal");
 const closeModal = document.getElementById("closeModal");
 
+// 跟踪用户是否已经开始编辑内容
+let hasUserEdited = false;
+
 // 初始化多语言支持 - 等待 DOM 和所有脚本加载完成
 document.addEventListener('DOMContentLoaded', function() {
   if (window.I18n) {
@@ -17,6 +20,13 @@ document.addEventListener('DOMContentLoaded', function() {
     window.I18n.setLanguage(savedLang);
     window.I18n.updatePageLanguage();
 
+    // 如果用户还没有编辑过内容，更新编辑框的默认内容
+    if (!hasUserEdited) {
+      const defaultContent = window.I18n.t("defaultContent") || "";
+      contentEl.value = defaultContent;
+      renderPreview();
+    }
+
     // 监听语言选择器变化
     const selector = document.getElementById('languageSelector');
     if (selector) {
@@ -24,6 +34,13 @@ document.addEventListener('DOMContentLoaded', function() {
       selector.addEventListener('change', function(e) {
         window.I18n.setLanguage(e.target.value);
         window.I18n.updatePageLanguage();
+
+        // 如果用户还没有编辑过内容，更新编辑框的默认内容
+        if (!hasUserEdited) {
+          const defaultContent = window.I18n.t("defaultContent") || "";
+          contentEl.value = defaultContent;
+          renderPreview();
+        }
       });
     }
   }
@@ -233,23 +250,15 @@ function shareToSocial(platform, url, title) {
   }
 }
 
-const defaultContent = `# 欢迎使用 Markdown Share
-
-在左侧输入 Markdown，右侧自动预览。
-
-## 功能
-- 实时预览
-- 生成短链接
-- 分享后可打开预览
-
-
-
-`;
-
+// 初始化编辑框内容
+const defaultContent = window.I18n?.t("defaultContent") || "";
 contentEl.value = defaultContent;
 renderPreview();
 
-contentEl.addEventListener("input", renderPreview);
+contentEl.addEventListener("input", function() {
+  hasUserEdited = true; // 标记用户已经编辑过内容
+  renderPreview();
+});
 
 shareBtn.addEventListener("click", async () => {
   shareBtn.disabled = true;

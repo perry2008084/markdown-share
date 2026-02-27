@@ -40,7 +40,10 @@ const translations = {
     "森林": "森林",
     "墨蓝": "墨蓝",
     "玫瑰": "玫瑰",
-    "关闭": "关闭"
+    "关闭": "关闭",
+
+    // 默认内容（编辑框）
+    "defaultContent": "# 欢迎使用 Markdown Share\n\n## 功能\n- **实时预览**：在左侧输入 Markdown，右侧自动预览\n- **生成短链接**：一键生成分享链接，分享后可立即打开预览\n- **多平台分享**：支持分享到微信、QQ、微博、Twitter\n- **主题切换**：8 种精美主题颜色，一键切换\n\n## 使用方法\n1. **写入**：在左侧编辑器中输入你的 Markdown 内容\n2. **预览**：右侧实时显示渲染效果\n3. **分享**：点击分享按钮生成短链接\n4. **复制**：点击复制按钮复制链接到剪贴板\n5. **社交分享**：点击社交按钮分享到对应平台\n\n## 提示\n- 支持所有标准 Markdown 语法\n- 支持代码高亮\n- 支持表格、列表、引用等元素\n- 完全免费使用\n\n## 开始使用\n在下方编辑框中开始你的 Markdown 创作吧！✍\n"
   },
   en: {
     // 首页
@@ -82,7 +85,10 @@ const translations = {
     "森林": "Forest",
     "墨蓝": "Ink",
     "玫瑰": "Rose",
-    "关闭": "Close"
+    "关闭": "Close",
+
+    // 默认内容（编辑框）
+    "defaultContent": "# Welcome to Markdown Share\n\n## Features\n- **Instant Preview**: See your Markdown rendered in real-time\n- **Short Links**: Generate shareable links for your content\n- **Multi-Platform**: Share to WeChat, QQ, Weibo, Twitter\n- **Beautiful Themes**: Choose from 8 color themes\n\n## How to Use\n1. **Write**: Type your Markdown content in the editor\n2. **Preview**: See the rendered preview instantly\n3. **Share**: Click the share button to generate a short link\n4. **Copy**: Copy the link and share it anywhere\n\n## Tips\n- Supports all standard Markdown syntax\n- Clean and distraction-free interface\n- Fast and lightweight\n\nEnjoy using Markdown Share! 🚀\n"
   },
   ja: {
     // 首页
@@ -124,7 +130,10 @@ const translations = {
     "森林": "フォレスト",
     "墨蓝": "インク",
     "玫瑰": "ローズ",
-    "关闭": "閉じる"
+    "关闭": "閉じる",
+
+    // 默认内容（编辑框）
+    "defaultContent": "# Markdown Share へようこそ\n\n## 機能\n- **リアルタイムプレビュー**: 左側で Markdown を入力すると、右側でリアルタイムにレンダリングされます\n- **短縮リンク生成**: コンテンツを共有するための短縮リンクを生成\n- **マルチプラットフォーム共有**: WeChat、QQ、Weibo、Twitter に対応\n- **美しいテーマ**: 8種類のカラーテーマから選択可能\n\n## 使い方\n1. **書く**: 左側のエディターで Markdown コンテンツを入力\n2. **プレビュー**: 右側でレンダリング結果をリアルタイムに確認\n3. **共有**: 「共有」ボタンをクリックして短縮リンクを生成\n4. **コピー**: 「コピー」ボタンでリンクをクリップボードにコピー\n5. **SNS共有**: ソーシャルボタンで各プラットフォームに共有\n\n## ヒント\n- 標準的な Markdown 構文をサポート\n- コードのシンタックスハイライト表示\n- テーブル、リスト、引用などの要素をサポート\n- クリーンで邪魔のないインターフェース\n- 高速で軽量\n\nMarkdown Share をお楽しみください！🚀\n"
   },
   de: {
     // 首页
@@ -166,16 +175,19 @@ const translations = {
     "森林": "Wald",
     "墨蓝": "Tinte",
     "玫瑰": "Rose",
-    "关闭": "Schließen"
+    "关闭": "Schließen",
+
+    // 默认内容（编辑框）
+    "defaultContent": "# Willkommen bei Markdown Share\n\n## Funktionen\n- **Sofortige Vorschau**: Sehen Sie Ihr Markdown in Echtzeit gerendert\n- **Kurze Links**: Erstellen Sie teilbare Links für Ihre Inhalte\n- **Multi-Plattform**: Teilen Sie zu WeChat, QQ, Weibo, Twitter\n- **Schöne Themen**: Wählen Sie aus 8 Farbthemen\n\n## Verwendung\n1. **Schreiben**: Geben Sie Ihren Markdown-Inhalt im Editor ein\n2. **Vorschau**: Sehen Sie die gerenderte Vorschau sofort\n3. **Teilen**: Klicken Sie auf die Schaltfläche \"Teilen\", um einen kurzen Link zu erstellen\n4. **Kopieren**: Klicken Sie auf \"Kopieren\", um den Link in die Zwischenablage zu kopieren\n5. **Soziales Teilen**: Klicken Sie auf die Social-Media-Buttons, um auf den entsprechenden Plattformen zu teilen\n\n## Tipps\n- Unterstützt die gesamte Standard-Markdown-Syntax\n- Unterstützt Syntaxhervorhebung für Code\n- Unterstützt Tabellen, Listen, Zitate und andere Elemente\n- Kostenlos und werbefreit zu nutzen\n\n## Beginnen\nFangen Sie jetzt an, Ihre Markdown-Inhalte zu erstellen! ✍\n"
   },
   es: {
     // 首页
     "写作、预览、分享": "Escribir, Previsualizar, Compartir",
-    "输入内容，生成短链接，分享后立即预览。": "Ingresa contenido, genera un enlace corto, previsualiza inmediatamente después de compartir.",
+    "输入内容，生成短链接，分享后立即预览。": "Introducir contenido, generar enlace corto, previsualizar inmediatamente después de compartir.",
     "分享": "Compartir",
     "编辑区": "Editor",
     "预览区": "Vista Previa",
-    "在这里输入 Markdown...": "Escribe Markdown aquí...",
+    "在这里输入 Markdown...": "Escriba Markdown aquí...",
     "分享链接": "Enlace de Compartir",
     "复制": "Copiar",
     "生成中...": "Generando...",
@@ -195,7 +207,7 @@ const translations = {
     "Twitter": "Twitter",
     "链接已复制，请在微信中粘贴分享": "Enlace copiado, pégalo en WeChat para compartir",
     "复制失败，请手动复制链接": "Error al copiar, por favor copia el enlace manualmente",
-    "查看我的 Markdown 分享": "Ver mi Markdown compartido",
+    "查看我的 Markdown 分享": "Ver mi compartición Markdown",
 
     // 主题切换
     "切换主题": "Cambiar Tema",
@@ -208,12 +220,15 @@ const translations = {
     "森林": "Bosque",
     "墨蓝": "Tinta",
     "玫瑰": "Rosa",
-    "关闭": "Cerrar"
+    "关闭": "Cerrar",
+
+    // 默认内容（编辑框）
+    "defaultContent": "# Bienvenido a Markdown Share\n\n## Funciones\n- **Vista Previa Instantánea**: Vea su Markdown renderizado en tiempo real\n- **Enlaces Cortos**: Genere enlaces compartibles para su contenido\n- **Multi-Plataforma**: Comparta a WeChat, QQ, Weibo, Twitter\n- **Temas Hermosos**: Elija entre 8 temas de color\n\n## Cómo Usar\n1. **Escribir**: Escriba su contenido Markdown en el editor\n2. **Vista Previa**: Vea la vista previa renderizada al instante\n3. **Compartir**: Haga clic en el botón \"Compartir\" para generar un enlace corto\n4. **Copiar**: Haga clic en \"Copiar\" para copiar el enlace al portapapeles\n5. **Compartir Social**: Haga clic en los botones de redes sociales para compartir en las plataformas correspondientes\n\n## Consejos\n- Admite toda la sintaxis estándar de Markdown\n- Admite resaltado de sintaxis para código\n- Admite tablas, listas, citas y otros elementos\n- Gratis y sin distracciones para usar\n\n## Comenzar\n¡Comience a crear sus contenidos Markdown ahora! 🚀\n"
   },
   fr: {
     // 首页
-    "写作、预览、分享": "Écrire, Prévisualiser, Partager",
-    "输入内容，生成短链接，分享后立即预览。": "Saisissez du contenu, générez un lien court, prévisualisez immédiatement après le partage.",
+    "写作、预览、分享": "Écrire, Aperçu, Partager",
+    "输入内容，生成短链接，分享后立即预览。": "Saisissez du contenu, générez un lien court, aperçu instantané après le partage.",
     "分享": "Partager",
     "编辑区": "Éditeur",
     "预览区": "Aperçu",
@@ -250,7 +265,10 @@ const translations = {
     "森林": "Forêt",
     "墨蓝": "Encre",
     "玫瑰": "Rose",
-    "关闭": "Fermer"
+    "关闭": "Fermer",
+
+    // 默认内容（编辑框）
+    "defaultContent": "# Bienvenue dans Markdown Share\n\n## Fonctionnalités\n- **Aperçu Instantané**: Voyez votre Markdown rendu en temps réel\n- **Liens Courts**: Générez des liens partageables pour votre contenu\n- **Multi-Plateforme**: Partagez sur WeChat, QQ, Weibo, Twitter\n- **Thèmes Élégants**: Choisissez parmi 8 thèmes de couleurs\n\n## Comment Utiliser\n1. **Écrire**: Saisissez votre contenu Markdown dans l'éditeur\n2. **Aperçu**: Voyez l'aperçu rendu instantanément\n3. **Partager**: Cliquez sur le bouton \"Partager\" pour générer un lien court\n4. **Copier**: Cliquez sur \"Copier\" pour copier le lien dans le presse-papiers\n5. **Partage Social**: Cliquez sur les boutons de réseaux sociaux pour partager sur les plateformes correspondantes\n\n## Conseils\n- Prend en charge toute la syntaxe Markdown standard\n- Prend en charge le coloration syntaxique pour le code\n- Prend en charge les tableaux, listes, citations et autres éléments\n- Gratuit et sans distractions à utiliser\n\n## Commencer\nCommencez à créer vos contenus Markdown maintenant! 🚀\n"
   },
   pt: {
     // 首页
@@ -288,11 +306,14 @@ const translations = {
     "夜晚": "Noite",
     "海洋": "Oceano",
     "熔岩": "Brasa",
-    "柑橘": "Citrico",
+    "柑橘": "Cítrico",
     "森林": "Floresta",
     "墨蓝": "Tinta",
     "玫瑰": "Rosa",
-    "关闭": "Fechar"
+    "关闭": "Fechar",
+
+    // 默认内容（编辑框）
+    "defaultContent": "# Bem-vindo ao Markdown Share\n\n## Recursos\n- **Visualização Instantânea**: Veja seu Markdown renderizado em tempo real\n- **Links Curtos**: Gere links compartilháveis para seu conteúdo\n- **Multi-Plataforma**: Compartilhe no WeChat, QQ, Weibo, Twitter\n- **Temas Bonitos**: Escolha entre 8 temas de cores\n\n## Como Usar\n1. **Escrever**: Digite seu conteúdo Markdown no editor\n2. **Visualizar**: Veja a visualização renderizada instantaneamente\n3. **Compartilhar**: Clique no botão \"Compartilhar\" para gerar um link curto\n4. **Copiar**: Clique no botão \"Copiar\" para copiar o link para a área de transferência\n5. **Compartilhamento Social**: Clique nos botões de redes sociais para compartilhar nas plataformas correspondentes\n\n## Dicas\n- Suporta toda a sintaxe Markdown padrão\n- Suporta destaque de sintaxe para código\n- Suporta tabelas, listas, citações e outros elementos\n- Gratuito e sem distrações para usar\n\n## Começar\nComece a criar seus conteúdos Markdown agora! 🚀\n"
   }
 };
 
